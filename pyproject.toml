@@ -1,0 +1,49 @@
+[tool.ruff]
+# ---------------------------
+# Grundläggande inställningar
+# ---------------------------
+target-version = "py312"
+line-length = 88          # Samma som Black – standard i Pythonvärlden
+indent-width = 4
+lint.extend-select = [
+    "I",  # isort: import-sortering
+    "DJ", # Django-plugin
+    "UP", # Python-uppgraderingsregler (t.ex. modern syntax)
+]
+
+# Ignorera varningar du inte vill ha
+lint.ignore = [
+    "E501",  # line too long (hanteras av line-length ovan)
+]
+
+# Filtyper/platser Ruff ska hoppa över
+extend-exclude = [
+    "migrations",
+    "venv",
+    ".venv",
+    "node_modules",
+]
+
+# ---------------------------
+# Django-specifik konfigurering
+# ---------------------------
+[tool.ruff.lint.per-file-ignores]
+# Ignorera vissa varningar i dessa filer (t.ex. __init__.py)
+"__init__.py" = ["F401"]
+
+# ---------------------------
+# Formatter-inställningar
+# ---------------------------
+[tool.ruff.format]
+quote-style = "double"    # använder " istället för '
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+# ---------------------------
+# isort-integration (importordning)
+# ---------------------------
+[tool.ruff.lint.isort]
+known-first-party = ["myapp"]   # byt ut till din Django-app
+combine-as-imports = true
+force-single-line = false
