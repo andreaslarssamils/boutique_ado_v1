@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- prettier-ignore -->
-    {% block meta % }
+    {% block meta %}
     <meta
       http-equiv="X-UA-Compatible"
       content="IE=edge"
@@ -19,7 +19,7 @@
     {% endblock %}
 
     <!-- prettier-ignore -->
-    {% block corecss % }
+    {% block corecss %}
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
@@ -50,7 +50,7 @@
     {% block extrajs %}
     {% endblock %}
 
-    <title>Boutique ADO {%% block extra_title %}{% endblock %}</title>
+    <title>Boutique ADO {% block extra_title %}{% endblock %}</title>
   </head>
   <body>
     <header class="container-fluid fixed-top"></header>
