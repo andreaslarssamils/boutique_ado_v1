@@ -57,6 +57,7 @@ MIDDLEWARE = [
     # `allauth.account.middleware.AccountMiddleware`. allauth needs the
     # template context processor and authentication backend, but no special
     # middleware entry by default.
+    "allauth.account.middleware.AccountMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
