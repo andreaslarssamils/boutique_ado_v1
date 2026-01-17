@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     "products",
     "bag",
     "checkout",
+    # Other
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -54,17 +56,14 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    # Removed invalid middleware from django-allauth — it does not provide
-    # `allauth.account.middleware.AccountMiddleware`. allauth needs the
-    # template context processor and authentication backend, but no special
-    # middleware entry by default.
-    "allauth.account.middleware.AccountMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = "boutiqe_ado.urls"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 TEMPLATES = [
     {
@@ -77,10 +76,15 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
-                "django.template.context_processors.request",  # important required by allauth
+                "django.template.context_processors.request",  # required by allauth
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "bag.contexts.bag_contents",  # custom context processor
+                "django.template.context_processors.media",
+                "bag.contexts.bag_contents",
+            ],
+            "builtins": [
+                "crispy_forms.templatetags.crispy_forms_tags",
+                "crispy_forms.templatetags.crispy_forms_field",
             ],
         },
     },
