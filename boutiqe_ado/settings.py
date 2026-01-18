@@ -17,6 +17,11 @@ import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Load local environment variables (kept out of git via .gitignore)
+# This supports the common pattern of defining Stripe keys etc. in env.py.
+if os.path.isfile(os.path.join(BASE_DIR, "env.py")):
+    import env  # noqa: F401
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
