@@ -105,6 +105,13 @@ def checkout(request):
             messages.error(request, "There's nothing in your bag at the moment")
             return redirect(reverse("products"))
 
+        if not stripe_secret_key:
+            messages.error(
+                request,
+                "Stripe secret key is missing. Set STRIPE_SECRET_KEY in your environment to use checkout.",
+            )
+            return redirect(reverse("view_bag"))
+
         current_bag = bag_contents(request)
         total = current_bag["grand_total"]
         stripe_total = round(total * 100)
