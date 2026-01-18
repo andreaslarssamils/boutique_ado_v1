@@ -30,7 +30,7 @@ if os.path.isfile(os.path.join(BASE_DIR, "env.py")):
 SECRET_KEY = "django-insecure-41mz+lfi_yug&vdrri1u1v8081duxak9%dkxz7)bd9e)s!2v92"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "DEVELOPMENT" in os.environ
+DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", "ckz8780-boutique-ado.herokuapp.com"]
 
