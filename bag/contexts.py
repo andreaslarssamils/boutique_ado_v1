@@ -1,7 +1,6 @@
 from decimal import Decimal
 
 from django.conf import settings
-from django.shortcuts import get_object_or_404
 
 from products.models import Product
 
@@ -12,9 +11,15 @@ def bag_contents(request):
     product_count = 0
     bag = request.session.get("bag", {})
 
+    invalid_item_ids = []
+
     for item_id, item_data in bag.items():
+        product = Product.objects.filter(pk=item_id).first()
+        if not product:
+            invalid_item_ids.append(item_id)
+            continue
+
         if isinstance(item_data, int):
-            product = get_object_or_404(Product, pk=item_id)
             total += item_data * product.price
             product_count += item_data
             bag_items.append(
@@ -26,7 +31,6 @@ def bag_contents(request):
             )
 
         else:
-            product = get_object_or_404(Product, pk=item_id)
             for size, quantity in item_data["items_by_size"].items():
                 total += quantity * product.price
                 product_count += quantity
@@ -38,6 +42,14 @@ def bag_contents(request):
                         "size": size,
                     }
                 )
+
+    # If products have been deleted since they were added to the bag, ensure the
+    # site still renders by cleaning up the stale bag entries.
+    if invalid_item_ids:
+        for item_id in invalid_item_ids:
+            bag.pop(item_id, None)
+        request.session["bag"] = bag
+        request.session.modified = True
 
     if total < settings.FREE_DELIVERY_THRESHOLD:
         delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
