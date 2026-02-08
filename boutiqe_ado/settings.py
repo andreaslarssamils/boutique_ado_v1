@@ -27,13 +27,17 @@ if os.path.isfile(os.path.join(BASE_DIR, "env.py")):
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-41mz+lfi_yug&vdrri1u1v8081duxak9%dkxz7)bd9e)s!2v92"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEVELOPMENT = os.getenv("DEVELOPMENT") == "1"
 DEBUG = DEVELOPMENT
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "botuiqe-ado-cf02bd7217ac.herokuapp.com",
+]
 
 
 # Application definition
