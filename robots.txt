@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /accounts/
+Disallow: /bag/
+Sitemap: https://botuiqe-ado-cf02bd7217ac.herokuapp.com/sitemap.xml
